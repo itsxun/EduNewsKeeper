@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.7
+
+repositories {
+	mavenLocal()
+	maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-data-jpa',
+			'org.xerial:sqlite-jdbc:3.8.11.2'
+	compile 'dom4j:dom4j:1.6.1'
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	compile 'jaxen:jaxen:1.1.6'
+	compile 'commons-beanutils:commons-beanutils:1.9.3'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+configurations {
+	providedRuntime
+}
